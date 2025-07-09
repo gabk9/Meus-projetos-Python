@@ -3,6 +3,7 @@ import numpy as np  # type: ignore
 import tkinter as tk
 from tkinter import simpledialog, messagebox
 
+
 # Janela principal invisível com tamanho semelhante à janela do gráfico
 root = tk.Tk()
 root.geometry("800x600")
