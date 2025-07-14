@@ -1,0 +1,264 @@
+1. Imprimir “Olá, Mundo!”
+print("Olá, Mundo!")
+
+
+2. Ler o nome do usuário e dar boas-vindas.
+nome = input("Digite seu nome: ")
+print(f"Olá, {nome}!")
+
+
+3. Ler dois números e imprimir a soma.
+a = int(input("Número 1: "))
+b = int(input("Número 2: "))
+print("Soma:", a + b)
+
+
+4. Verificar se um número é par ou ímpar.
+n = int(input("Número: "))
+if n % 2 == 0:
+    print("Par")
+else:
+    print("Ímpar")
+
+
+5. Verificar se o usuário é maior de idade (>=18).
+idade = int(input("Idade: "))
+if idade >= 18:
+    print("Maior de idade")
+else:
+    print("Menor de idade")
+
+
+6. Calcular a média de três notas.
+n1 = float(input("Nota 1: "))
+n2 = float(input("Nota 2: "))
+n3 = float(input("Nota 3: "))
+media = (n1 + n2 + n3) / 3
+print("Média:", media)
+
+
+7. Converter temperatura Celsius para Fahrenheit.
+c = float(input("Celsius: "))
+a
+print("Fahrenheit:", f)
+
+
+8. Contar quantas vezes uma letra aparece numa frase.
+frase = input("Frase: ")
+letra = input("Letra: ")
+print(f"A letra '{letra}' aparece {frase.count(letra)} vezes.")
+
+
+9. Calcular o fatorial de um número.
+n = int(input("Número: "))
+fat = 1
+for i in range(1, n+1):
+    fat *= i
+print("Fatorial:", fat)
+
+
+10. Gerar lista dos 10 primeiros números pares.
+pares = list(range(0, 20, 2))
+print(pares)
+
+
+11. Verificar se uma palavra é palíndromo.
+palavra = input("Palavra: ").lower()
+if palavra == palavra[::-1]:
+    print("Palíndromo")
+else:
+    print("Não é palíndromo")
+
+
+12. Calcular máximo divisor comum (MDC) entre dois números.
+def mdc(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a
+
+x = int(input("Número 1: "))
+y = int(input("Número 2: "))
+print("MDC:", mdc(x, y))
+
+
+13. Somar somente os números pares de uma lista.
+lista = [int(x) for x in input("Números separados por espaço: ").split()]
+soma_pares = sum(x for x in lista if x % 2 == 0)
+print("Soma dos pares:", soma_pares)
+
+# 14. Imprimir a tabuada de um número.
+num = int(input("Número: "))
+for i in range(1, 11):
+    print(f"{num} x {i} = {num * i}")
+
+
+15. Contar vogais em uma string.
+texto = input("Texto: ").lower()
+vogais = 'aeiou'
+count = sum(1 for c in texto if c in vogais)
+print("Número de vogais:", count)
+
+
+16. Criar dicionário com nomes e idades e buscar por nome.
+pessoas = {"Ana": 25, "João": 30, "Maria": 22}
+nome = input("Nome para buscar: ")
+idade = pessoas.get(nome)
+if idade:
+    print(f"{nome} tem {idade} anos")
+else:
+    print("Nome não encontrado")
+
+
+17. Ordenar lista sem usar sort().
+lista = [5, 2, 9, 1]
+for i in range(len(lista)):
+    for j in range(i+1, len(lista)):
+        if lista[i] > lista[j]:
+            lista[i], lista[j] = lista[j], lista[i]
+print(lista)
+
+
+18. Listar números primos em uma lista.
+def eh_primo(n):
+    if n < 2:
+        return False
+    for i in range(2, int(n**0.5)+1):
+        if n % i == 0:
+            return False
+    return True
+
+lista = [2, 3, 4, 5, 6, 7]
+primos = [x for x in lista if eh_primo(x)]
+print("Primos:", primos)
+
+
+19. Jogo de adivinhação com 5 tentativas.
+import random
+num = random.randint(1, 20)
+tentativas = 5
+while tentativas > 0:
+    palpite = int(input("Tente adivinhar: "))
+    if palpite == num:
+        print("Acertou!")
+        break
+    else:
+        print("Errado!")
+        tentativas -= 1
+if tentativas == 0:
+    print("Suas tentativas acabaram. O número era", num)
+
+
+20. Função que retorna maior string numa lista.
+def maior_string(lista):
+    return max(lista, key=len)
+
+palavras = ["maçã", "banana", "laranja", "abacaxi"]
+print(maior_string(palavras))
+
+
+21. Ler arquivo texto e contar linhas.
+with open("arquivo.txt", "r") as f:
+    linhas = f.readlines()
+print("Linhas:", len(linhas))
+
+
+22. Criar classe ContaBancaria com depositar, sacar e mostrar saldo.
+class ContaBancaria:
+    def __init__(self):
+        self.saldo = 0
+
+    def depositar(self, valor):
+        self.saldo += valor
+
+    def sacar(self, valor):
+        if valor <= self.saldo:
+            self.saldo -= valor
+            return True
+        else:
+            return False
+
+    def mostrar_saldo(self):
+        print("Saldo:", self.saldo)
+
+conta = ContaBancaria()
+conta.depositar(100)
+conta.sacar(30)
+conta.mostrar_saldo()
+
+
+23. Ler CSV e exibir dados formatados.
+import csv
+with open('dados.csv', newline='') as csvfile:
+    leitor = csv.reader(csvfile)
+    for linha in leitor:
+        print(", ".join(linha))
+
+
+24. Tratar entrada inválida para inteiro com try-except.
+try:
+    n = int(input("Digite um número inteiro: "))
+    print("Número:", n)
+except ValueError:
+    print("Entrada inválida!")
+
+
+25. Simular fila com listas (enfileirar e desenfileirar).
+fila = []
+fila.append("pessoa1")  # enfileirar
+fila.append("pessoa2")
+atendido = fila.pop(0)  # desenfileirar
+print(atendido)
+
+
+26. Implementar busca binária em lista ordenada.
+def busca_binaria(lista, x):
+    inicio, fim = 0, len(lista) - 1
+    while inicio <= fim:
+        meio = (inicio + fim) // 2
+        if lista[meio] == x:
+            return meio
+        elif lista[meio] < x:
+            inicio = meio + 1
+        else:
+            fim = meio - 1
+    return -1
+
+lista = [1, 3, 5, 7, 9]
+print(busca_binaria(lista, 7))
+
+
+27. Gerar sequência Fibonacci até limite.
+limite = int(input("Limite: "))
+a, b = 0, 1
+while a <= limite:
+    print(a, end=" ")
+    a, b = b, a + b
+print()
+
+
+28. Criar gerador infinito de números pares.
+def pares_inf():
+    n = 0
+    while True:
+        yield n
+        n += 2
+
+gen = pares_inf()
+for _ in range(5):
+    print(next(gen))
+
+
+29. Desenhar pirâmide de asteriscos de altura n.
+n = int(input("Altura: "))
+for i in range(1, n+1):
+    print(" "*(n - i) + "*"*(2*i - 1))
+
+
+30. Recursão para contar formas de subir escada (1 ou 2 degraus).
+def escada(n):
+    if n == 0 or n == 1:
+        return 1
+    return escada(n-1) + escada(n-2)
+
+degraus = int(input("Número de degraus: "))
+print("Formas de subir:", escada(degraus))
