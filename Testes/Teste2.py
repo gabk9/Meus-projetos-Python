@@ -1,11 +1,21 @@
-import math
-import os
+nome = str(input("Me diga seu nome: "))
+sobrenome = str(input("Me diga seu sobrenome: "))
 
-n1 = int(input("Me diga um número: "))
-n2 = int(input("Me diga outro número: "))
+nomeCompleto = nome + " " + sobrenome
 
-print(f"\nA raiz quadrada de {n1: d} é: {math.sqrt(n1): .2f}")
-print(f"A potênciação de {n1: d} elevado à {n2: d} é: {math.pow(n1, n2)}")
+print("Seu nome completo é: ", nomeCompleto)
 
-os.system("cls")
-print(f"\n{os.listdir()}")
+contador = len(nomeCompleto) - nomeCompleto.count(" ")
+
+print(f"Essa string tem {contador} letras")
+
+texto = ""
+
+while 1:
+    palavras = input("Me diga uma palavra (digite exit para sair do laço): ")
+    if palavras.lower() == "exit":
+        break
+    texto += palavras + " "
+
+print("O resultado da concatenação ficou:", texto.strip())
+    
