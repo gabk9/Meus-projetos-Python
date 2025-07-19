@@ -1,0 +1,89 @@
+============================
+ FUNÇÕES E MÉTODOS DE SET (CONJUNTOS)
+============================
+
+1. set(iterável)
+   ➤ Cria um conjunto a partir de um iterável, removendo duplicatas.
+   Exemplo: set([1, 2, 2, 3]) → {1, 2, 3}
+
+2. add(x)
+   ➤ Adiciona o elemento x ao conjunto.
+   Exemplo: conjunto.add(4)
+
+3. update(iterável)
+   ➤ Adiciona múltiplos elementos de um iterável.
+   Exemplo: conjunto.update([5, 6])
+
+4. remove(x)
+   ➤ Remove x do conjunto. Erro se não existir.
+   Exemplo: conjunto.remove(2)
+
+5. discard(x)
+   ➤ Remove x do conjunto. NÃO gera erro se não existir.
+   Exemplo: conjunto.discard(2)
+
+6. pop()
+   ➤ Remove e retorna um elemento aleatório do conjunto.
+   Exemplo: conjunto.pop()
+
+7. clear()
+   ➤ Remove todos os elementos do conjunto.
+   Exemplo: conjunto.clear()
+
+8. union(set2)
+   ➤ Retorna a união com outro conjunto (todos os elementos únicos).
+   Exemplo: A.union(B)
+
+9. update(set2)
+   ➤ Atualiza o conjunto com a união (igual ao operador |=).
+   Exemplo: A.update(B)
+
+10. intersection(set2)
+    ➤ Retorna os elementos em comum entre dois conjuntos.
+    Exemplo: A.intersection(B)
+
+11. intersection_update(set2)
+    ➤ Atualiza removendo os que não estão em comum.
+    Exemplo: A.intersection_update(B)
+
+12. difference(set2)
+    ➤ Retorna os elementos que estão em A, mas não em B.
+    Exemplo: A.difference(B)
+
+13. difference_update(set2)
+    ➤ Remove do conjunto os elementos que também estão em B.
+    Exemplo: A.difference_update(B)
+
+14. symmetric_difference(set2)
+    ➤ Retorna elementos que estão em A ou B, mas não em ambos.
+    Exemplo: A.symmetric_difference(B)
+
+15. symmetric_difference_update(set2)
+    ➤ Atualiza A com a diferença simétrica.
+    Exemplo: A.symmetric_difference_update(B)
+
+16. issubset(set2)
+    ➤ Retorna True se A for subconjunto de B.
+    Exemplo: A.issubset(B)
+
+17. issuperset(set2)
+    ➤ Retorna True se A for superconjunto de B.
+    Exemplo: A.issuperset(B)
+
+18. isdisjoint(set2)
+    ➤ Retorna True se A e B não têm nenhum elemento em comum.
+    Exemplo: A.isdisjoint(B)
+
+19. len(set)
+    ➤ Retorna o número de elementos.
+    Exemplo: len(A)
+
+20. in
+    ➤ Verifica se um elemento está no conjunto.
+    Exemplo: if 3 in A: ...
+
+21. set comprehension
+    ➤ Forma rápida de criar conjuntos.
+    Exemplo: {x for x in range(10) if x % 2 == 0} → {0, 2, 4, 6, 8}
+
+============================

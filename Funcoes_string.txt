@@ -1,0 +1,105 @@
+============================
+ FUNÇÕES E MÉTODOS DE STRING
+============================
+
+1. upper()
+   ➤ Converte todos os caracteres para maiúsculo.
+   Exemplo: "abc".upper() → "ABC"
+
+2. lower()
+   ➤ Converte todos os caracteres para minúsculo.
+   Exemplo: "ABC".lower() → "abc"
+
+3. capitalize()
+   ➤ Deixa apenas o primeiro caractere em maiúsculo.
+   Exemplo: "python".capitalize() → "Python"
+
+4. title()
+   ➤ Converte para título (primeira letra de cada palavra em maiúscula).
+   Exemplo: "meu nome".title() → "Meu Nome"
+
+5. strip()
+   ➤ Remove espaços (ou caracteres) extras no início e fim.
+   Exemplo: "  teste  ".strip() → "teste"
+
+6. lstrip()
+   ➤ Remove espaços (ou caracteres) apenas do início.
+   Exemplo: "  teste".lstrip() → "teste"
+
+7. rstrip()
+   ➤ Remove espaços (ou caracteres) apenas do fim.
+   Exemplo: "teste  ".rstrip() → "teste"
+
+8. replace(antigo, novo)
+   ➤ Substitui partes da string.
+   Exemplo: "olá mundo".replace("olá", "hello") → "hello mundo"
+
+9. split(sep)
+   ➤ Divide a string em partes (lista) usando um separador.
+   Exemplo: "a,b,c".split(",") → ["a", "b", "c"]
+
+10. join(lista)
+    ➤ Junta elementos de uma lista com um separador.
+    Exemplo: ",".join(["a", "b", "c"]) → "a,b,c"
+
+11. find(sub)
+    ➤ Retorna o índice da primeira ocorrência da substring.
+    Exemplo: "banana".find("na") → 2
+
+12. rfind(sub)
+    ➤ Retorna o índice da última ocorrência da substring.
+    Exemplo: "banana".rfind("na") → 4
+
+13. index(sub)
+    ➤ Semelhante ao find(), mas gera erro se não encontrar.
+    Exemplo: "abc".index("b") → 1
+
+14. count(sub)
+    ➤ Conta quantas vezes a substring aparece.
+    Exemplo: "banana".count("a") → 3
+
+15. startswith(prefixo)
+    ➤ Verifica se a string começa com o valor dado.
+    Exemplo: "python".startswith("py") → True
+
+16. endswith(sufixo)
+    ➤ Verifica se a string termina com o valor dado.
+    Exemplo: "arquivo.txt".endswith(".txt") → True
+
+17. isalpha()
+    ➤ Retorna True se todos os caracteres forem letras.
+    Exemplo: "abc".isalpha() → True
+
+18. isdigit()
+    ➤ Retorna True se todos os caracteres forem números.
+    Exemplo: "123".isdigit() → True
+
+19. isalnum()
+    ➤ Retorna True se todos forem letras ou números.
+    Exemplo: "abc123".isalnum() → True
+
+20. isspace()
+    ➤ Retorna True se a string só contém espaços.
+    Exemplo: "   ".isspace() → True
+
+21. isnumeric()
+    ➤ Verifica se todos os caracteres são numéricos.
+    Exemplo: "²³".isnumeric() → True
+
+22. isupper()
+    ➤ Verifica se todos os caracteres estão em maiúsculo.
+    Exemplo: "ABC".isupper() → True
+
+23. islower()
+    ➤ Verifica se todos os caracteres estão em minúsculo.
+    Exemplo: "abc".islower() → True
+
+24. len(string)
+    ➤ Retorna o número de caracteres da string.
+    Exemplo: len("python") → 6
+
+25. in
+    ➤ Verifica se uma substring existe dentro da string.
+    Exemplo: "py" in "python" → True
+
+============================
