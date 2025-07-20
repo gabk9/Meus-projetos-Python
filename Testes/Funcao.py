@@ -1,89 +1,52 @@
-import matplotlib.pyplot as plt  # type: ignore 
-import numpy as np  # type: ignore
-import tkinter as tk
-from tkinter import simpledialog, messagebox
+def calculadora():
+    print("Bem-vindo à calculadora! Digite 'sair' para encerrar, '=' para mostrar o resultado.\n")
 
+    resultado = None
 
-# Janela principal invisível com tamanho semelhante à janela do gráfico
-root = tk.Tk()
-root.geometry("800x600")
-root.withdraw()
-
-def readFloat(msg):
     while True:
-        try:
-            valor = simpledialog.askfloat("Entrada de Dados", msg, parent=root)
-            if valor is None:
-                raise ValueError("Cancelado")
-            return valor
-        except:
-            messagebox.showerror("Erro", "Digite um número válido.", parent=root)
+        # Se resultado for None, pede o primeiro número
+        if resultado is None:
+            entrada = input("Digite o primeiro número (ou 'sair'): ")
+            if entrada.lower() == "sair":
+                break
+            try:
+                resultado = float(entrada)
+            except ValueError:
+                print("Número inválido! Tente novamente.")
+                continue
+        else:
+            op = input("Digite a operação (+, -, *, /), '=' para mostrar resultado, ou 'sair': ").strip()
+            if op == "=":
+                print(f"Resultado atual: {resultado}")
+                continue
+            if op.lower() == "sair":
+                break
+            if op not in ["+", "-", "*", "/"]:
+                print("Operação inválida! Tente novamente.")
+                continue
 
-# Entradas
-b = readFloat("Número inicial de células:")
-a = readFloat("Taxa de crescimento exponencial (ex: 1.03 para 3%):")
-taxaLinear = readFloat("Taxa de crescimento linear (por dia):")
-tempoFinal = readFloat("Tempo final da simulação (dias):")
+            entrada = input("Digite o próximo número: ")
+            try:
+                num = float(entrada)
+            except ValueError:
+                print("Número inválido! Tente novamente.")
+                continue
 
-# Vetor de tempo
-x = np.linspace(0, tempoFinal, 100)
+            if op == "+":
+                resultado += num
+            elif op == "-":
+                resultado -= num
+            elif op == "*":
+                resultado *= num
+            elif op == "/":
+                if num == 0:
+                    print("Erro: divisão por zero!")
+                    continue
+                resultado /= num
 
-# ======== GRÁFICO 1: ANTES DO TRATAMENTO ========
-yCancer = b * (a ** x)
-yNormal = b + taxaLinear * x
+def main():
+    calculadora()
+    print("Até mais!")
 
-plt.figure("Antes do Tratamento", figsize=(8, 6))
-plt.plot(x, yCancer, label="Células Cancerígenas (Exponencial)", color="red")
-plt.plot(x, yNormal, label="Células Normais (Linear)", color="green")
-plt.xlabel("Tempo (dias)")
-plt.ylabel("Número de células")
-plt.title("Antes do Tratamento")
-plt.legend()
-plt.grid(True)
-
-dados = f"""Células iniciais: {b}
-Taxa exponencial: {a}
-Taxa linear: {taxaLinear}
-Tempo total: {tempoFinal} dias"""
-
-plt.annotate(dados,
-             xy=(tempoFinal * 0.7, max(max(yCancer), max(yNormal)) * 0.6),
-             fontsize=10,
-             bbox=dict(boxstyle="round", facecolor='white', alpha=0.7))
-
-# Escala log?
-usar_log = messagebox.askyesno("Escala logarítmica", "Usar escala logarítmica no eixo Y?", parent=root)
-if usar_log:
-    plt.yscale("log")
-
-# ======== GRÁFICO 2: APÓS O TRATAMENTO ========
-# Simulação de tratamento:
-a_tratado = a * 0.8  # Reduz crescimento exponencial
-taxaLinear_tratado = taxaLinear * 0.95  # Leve impacto nas normais
-
-yCancerTratado = b * (a_tratado ** x)
-yNormalTratado = b + taxaLinear_tratado * x
-
-plt.figure("Após o Tratamento", figsize=(8, 6))
-plt.plot(x, yCancerTratado, label="Câncer (Tratado)", color="orange")
-plt.plot(x, yNormalTratado, label="Normais (Tratamento)", color="blue")
-plt.xlabel("Tempo (dias)")
-plt.ylabel("Número de células")
-plt.title("Após o Tratamento")
-plt.legend()
-plt.grid(True)
-
-dados_tratado = f"""TRATAMENTO:
-Nova taxa cancerígena: {round(a_tratado, 4)}
-Nova taxa linear: {round(taxaLinear_tratado, 4)}"""
-
-plt.annotate(dados_tratado,
-             xy=(tempoFinal * 0.7, max(max(yCancerTratado), max(yNormalTratado)) * 0.6),
-             fontsize=10,
-             bbox=dict(boxstyle="round", facecolor='white', alpha=0.7))
-
-if usar_log:
-    plt.yscale("log")
-
-plt.tight_layout()
-plt.show()
+if __name__ == "__main__":
+    main()
