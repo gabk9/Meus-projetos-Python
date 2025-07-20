@@ -1,0 +1,69 @@
+============================
+ FUNÇÕES E MÉTODOS DE DICIONÁRIOS (dict)
+============================
+
+1. dict()
+   ➤ Cria um dicionário vazio ou a partir de pares chave-valor.
+   Exemplo: dict(nome="Gabriel", idade=18)
+
+2. chave:valor
+   ➤ Define um par chave-valor.
+   Exemplo: dados["nome"] = "Gabriel"
+
+3. keys()
+   ➤ Retorna uma lista com todas as chaves.
+   Exemplo: dados.keys() → dict_keys(['nome', 'idade'])
+
+4. values()
+   ➤ Retorna uma lista com todos os valores.
+   Exemplo: dados.values() → dict_values(['Gabriel', 18])
+
+5. items()
+   ➤ Retorna uma lista de tuplas (chave, valor).
+   Exemplo: dados.items() → dict_items([('nome', 'Gabriel'), ('idade', 18)])
+
+6. get(chave[, valor_padrão])
+   ➤ Retorna o valor da chave, ou o valor padrão se não existir.
+   Exemplo: dados.get("email", "não informado")
+
+7. update(dict2)
+   ➤ Atualiza o dicionário com os pares de outro.
+   Exemplo: dados.update({"email": "gabriel@email.com"})
+
+8. pop(chave)
+   ➤ Remove uma chave e retorna seu valor.
+   Exemplo: dados.pop("idade")
+
+9. popitem()
+   ➤ Remove e retorna o último item inserido.
+   Exemplo: dados.popitem()
+
+10. clear()
+    ➤ Remove todos os itens do dicionário.
+    Exemplo: dados.clear()
+
+11. copy()
+    ➤ Retorna uma cópia superficial do dicionário.
+    Exemplo: novo = dados.copy()
+
+12. in
+    ➤ Verifica se uma chave existe no dicionário.
+    Exemplo: if "nome" in dados: ...
+
+13. del
+    ➤ Remove uma chave do dicionário.
+    Exemplo: del dados["nome"]
+
+14. len(dict)
+    ➤ Retorna o número de itens (pares chave-valor).
+    Exemplo: len(dados)
+
+15. dict comprehension
+    ➤ Criação rápida de dicionários.
+    Exemplo: {x: x**2 for x in range(5)} → {0: 0, 1: 1, 2: 4, 3: 9, 4: 16}
+
+16. fromkeys(seq[, valor])
+    ➤ Cria dicionário com chaves da sequência e valor padrão.
+    Exemplo: dict.fromkeys(["a", "b"], 0) → {"a": 0, "b": 0}
+
+============================
