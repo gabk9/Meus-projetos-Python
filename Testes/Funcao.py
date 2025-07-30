@@ -17,7 +17,7 @@ def calculadora():
         else:
             op = input("Digite a operação (+, -, *, /), '=' para mostrar resultado, ou 'sair': ").strip()
             if op == "=":
-                print(f"Resultado atual: {resultado}")
+                print(f"Resultado  atual: {resultado}")
                 continue
             if op.lower() == "sair":
                 break

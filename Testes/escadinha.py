@@ -12,4 +12,4 @@ def main():
         degraus = "#" * i
         print(espacos + degraus + "  " + degraus)
 
-main()
+main() 

@@ -5,4 +5,4 @@ if n == 0:
 elif n % 2 == 0:
     print(f"{n} é par")
 else:
-    print(f"{n} é impar")
+    print(f"{n} é impar") 

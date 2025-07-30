@@ -21,7 +21,7 @@ pos_menor = (0, 0)
 
 for i in range(3):
     for j in range(4):
-        if mat[i][j] > maior:
+        if mat[i][j] > maior: 
             maior = mat[i][j]
             pos_maior = (i, j)
         if mat[i][j] < menor:

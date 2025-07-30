@@ -14,4 +14,4 @@ print(f"Existem {len(frutas)} de frutas nessa tupla")
 #     print("Fruta:", fruta)
 #     qtd += 1
 
-# print(f"Existem {qtd} frutas nessa tupla.")
+# print(f"Existem {qtd} frutas nessa tupla.") 

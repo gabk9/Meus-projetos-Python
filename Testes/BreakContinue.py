@@ -22,3 +22,4 @@ while True:
             nums += adicionar
     except ValueError:
         print("Entrada inválida. Digite um número.")
+ 

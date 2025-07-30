@@ -4,4 +4,4 @@ n3 = float(input("Me diga a terceira nota: "))
 
 media = (n1 + n2 + n3) / 3
 
-print(f"A media de suas notas é {media: .2f}")
+print(f"A media de suas notas é {media: .2f}") 

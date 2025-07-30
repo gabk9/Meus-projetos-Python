@@ -9,4 +9,4 @@ else:
 
 palavra = str(input("Me diga uma palavra: ")).lower()
 count = sum(1 for c in palavra if c in VOGAL)
-print(f"A palavra: {palavra}, tem {count} vogais")
+print(f"A palavra: {palavra}, tem {count} vogais") 

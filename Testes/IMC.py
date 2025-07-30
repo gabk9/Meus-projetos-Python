@@ -12,7 +12,7 @@ def pause(msg="Pressione qualquer tecla para continuar..."):
 
 def Result(altura, peso):
     altura /= 100
-    imc = peso / (altura ** 2)
+    imc = peso / (altura ** 2) 
 
     print()
     if imc < 18.5:

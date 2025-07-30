@@ -8,4 +8,4 @@ y = int(input("Me diga outro número: "))
 
 maxDiv = mdc(x, y)
 
-print(f"O maximo divisor comum entre {x} e {y} é: {maxDiv}")
+print(f"O maximo divisor comum entre {x} e {y} é: {maxDiv}") 

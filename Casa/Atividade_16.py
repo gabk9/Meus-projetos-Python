@@ -2,7 +2,7 @@ id = {"fruta1": 0.0,
       "fruta2": 0.0, 
       "fruta3": 0.0, 
       "fruta4": 0.0,
-      "fruta5": 0.0}
+      "fruta5": 0.0} 
 
 qtd = int(input("Quantas frutas deseja adicionar?? (até 5) "))
 

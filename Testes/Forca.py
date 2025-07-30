@@ -15,7 +15,7 @@ def main():
     PalavraSecreta = r.get_random_word()
 
     if PalavraSecreta is None:
-        print("Não foi possível gerar uma palavra.")
+        print("Não foi possível gerar uma palavra.") 
         return
 
     PalavraSecreta = PalavraSecreta.lower()
