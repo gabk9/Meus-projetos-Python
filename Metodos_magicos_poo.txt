@@ -1,0 +1,77 @@
+# MÉTODOS MÁGICOS EM PYTHON (POO)
+# ---------------------------------------
+# Também conhecidos como "dunder methods" (double underscore)
+
+# 1. Inicialização e Representação
+    __init__(self, ...)          # Construtor (inicializa a instância)
+    __del__(self)                # Destrutor (chamado ao destruir o objeto)
+    __repr__(self)               # Representação oficial (debug)
+    __str__(self)                # Representação amigável (print)
+    __bytes__(self)              # Conversão para bytes
+    __format__(self, format_spec)# Formatação com format()
+    __hash__(self)               # Hash do objeto (usado em dict/set)
+
+# 2. Comparações
+    __eq__(self, other)          # Igualdade ==
+    __ne__(self, other)          # Diferença !=
+    __lt__(self, other)          # Menor <
+    __le__(self, other)          # Menor ou igual <=
+    __gt__(self, other)          # Maior >
+    __ge__(self, other)          # Maior ou igual >=
+
+# 3. Operadores aritméticos
+    __add__(self, other)         # Soma +
+    __sub__(self, other)         # Subtração -
+    __mul__(self, other)         # Multiplicação *
+    __matmul__(self, other)      # Multiplicação de matrizes @
+    __truediv__(self, other)     # Divisão /
+    __floordiv__(self, other)    # Divisão inteira //
+    __mod__(self, other)         # Módulo %
+    __pow__(self, other)         # Potência **
+    __neg__(self)                # Negativo -
+    __pos__(self)                # Positivo +
+    __abs__(self)                # Valor absoluto abs()
+
+# 4. Operadores reversos
+    __radd__(self, other)        # other + self (se __add__ não existir em other)
+    __rsub__, __rmul__, etc.     # Versões reversas para cada operador
+
+# 5. Operadores in-place (+=, -=, etc)
+    __iadd__(self, other)        # Soma com atribuição +=
+    __isub__(self, other)        # Subtração com atribuição -=
+    __imul__(self, other)        # Multiplicação com atribuição *=
+    __itruediv__(self, other)    # Divisão com atribuição /=
+
+# 6. Acesso a atributos
+    __getattr__(self, name)      # Quando o atributo não existe
+    __getattribute__(self, name) # Sempre que acessa um atributo
+    __setattr__(self, name, value) # Ao definir um atributo
+    __delattr__(self, name)      # Ao deletar um atributo
+
+# 7. Container (listas, dicionários, etc)
+    __len__(self)                # len()
+    __getitem__(self, key)       # obj[key]
+    __setitem__(self, key, value)# obj[key] = value
+    __delitem__(self, key)       # del obj[key]
+    __contains__(self, item)     # item in obj
+    __iter__(self)               # Iterador (for)
+    __next__(self)               # Próximo item
+
+# 8. Chamadas e contextos
+    __call__(self, ...)          # Permite chamar o objeto como uma função
+    __enter__(self)              # Context manager: with
+    __exit__(self, exc_type, exc_val, exc_tb) # Saída do contexto
+
+# 9. Conversões
+    __bool__(self)               # bool()
+    __int__(self)                # int()
+    __float__(self)              # float()
+    __complex__(self)            # complex()
+
+# 10. Classe e metaclasse
+    __new__(cls, ...)            # Criação da instância (antes do __init__)
+    __class_getitem__(cls, item)# Usado com subscrição em classes (ex: MyClass[int])
+
+# 11. Extras
+    __dir__(self)                # Lista de atributos com dir()
+    __sizeof__(self)             # Tamanho em bytes com sys.getsizeof()

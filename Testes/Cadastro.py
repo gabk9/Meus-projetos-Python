@@ -1,4 +1,4 @@
-import json, os, msvcrt
+import json, os, msvcrt, time
 
 ARQUIVO = "clientes.json"
 
@@ -87,14 +87,32 @@ def editar_cliente():
     print("Cliente com esse CPF não foi encontrado.")
     pause(cls)
 
+def type(texto, ms):
+    for i in range(len(texto)):
+        print(texto[i], end="", flush=True)
+        time.sleep(ms / 1000)
+
+def Vload(ms):
+    barra = 30
+    for i in range(barra + 1):
+        percent = (i * 100) / barra
+        print("\r[", end="", flush=True)
+
+        for j in range(i):
+            print("#", end="", flush=True)
+
+        for k in range(barra - i):
+            print(" ", end="", flush=True)
+
+        print(f"] {percent:3.0f}%", end="", flush=True)
+        time.sleep(ms / 1000)
+
 def menu():
     while True:
+        Vload(25)
+        cls()
         print("\n====MENU CLIENTES====")
-        print("[1] Adicionar cliente")
-        print("[2] Listar todos os clientes")
-        print("[3] Editar cliente (por CPF)")
-        print("[4] Buscar cliente")
-        print("[5] Sair")
+        type("[1] Adicionar cliente\n[2] Listar todos os clientes\n[3] Editar cliente (por CPF)\n[4] Buscar cliente\n[5] Sair\n", 20)
 
         op = input("Escolha uma opção: ")
 
