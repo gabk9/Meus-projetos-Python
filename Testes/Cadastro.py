@@ -96,7 +96,7 @@ def Vload(ms):
     barra = 30
     for i in range(barra + 1):
         percent = (i * 100) / barra
-        print("\r[", end="", flush=True)
+        print("\r[", end="", flush=True) 
 
         for j in range(i):
             print("#", end="", flush=True)
