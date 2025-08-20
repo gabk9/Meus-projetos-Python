@@ -116,21 +116,21 @@ def menu():
 
         op = input("Escolha uma opção: ")
 
-        if op == "1":
-            adicionar_cliente()
-        elif op == "2":
-            listar_clientes()
-        elif op == "3":
-            editar_cliente()
-        elif op == "4":
-            buscar_cliente()
-        elif op == "5":
-            print("Encerrando programa...")
-            break
-        else:
-            print("Opção inválida!")
-            pause()
-            cls()
+        match op:
+            case '1':
+                adicionar_cliente()
+            case '2':
+                listar_clientes()
+            case '3':
+                editar_cliente()
+            case '4':
+                buscar_cliente()
+            case '5':
+                print("Encerrando o programa...")
+                break
+            case _:
+                print("Opção inválida!")
+                pause()
+                cls()
 
-# Executar
 menu()
