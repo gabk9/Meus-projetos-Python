@@ -5,7 +5,7 @@ def func(list):
 def main():
     myList = []
 
-    while 1:
+    while True:
         qty = int(input("Type-in the quantity of numbers in the list: "))
 
         if qty < 2:
