@@ -1,0 +1,1 @@
+print(input("Me diga uma string: ")[::-1])
