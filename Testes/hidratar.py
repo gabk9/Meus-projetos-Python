@@ -81,6 +81,7 @@ def alarmConfig():
             pause()
             cls()
             continue
+        typeSpeed = 0
 
         break
 
@@ -120,6 +121,7 @@ def AlarmMenu():
     with open(USER_DATA, "r", encoding="utf-8") as f:
         config = json.load(f)
 
+    name = user["Nome"]
     weight = user["Peso"]
     age = user["Idade"]
     gender = user["Sexo"]
@@ -155,7 +157,7 @@ def AlarmMenu():
 
     cls()
     print(f"{tittle:=^25}")
-    print(f"Voce deveria beber aproximadamente {total_water:.0f} ml de água hoje.")
+    print(f"{name}, você deveria beber aproximadamente {total_water:.0f} ml de água hoje.")
     print(f"Vai ter {doses} alarmes a cada {interval_min} minutos (~{water_per_dose:.0f} ml por dose).")
     Sleep(3000)
     cls()
@@ -170,7 +172,7 @@ def AlarmMenu():
         if next_alarm > now:
             delta_seconds = (next_alarm - now).total_seconds()
             time.sleep(delta_seconds)
-        message = f"[{next_alarm.strftime('%H:%M')}] Hora de tomar {water_per_dose:.0f} ml de água!"
+        message = f"[{next_alarm.strftime('%H:%M')}] {name}, hora de tomar {water_per_dose:.0f} ml de água!"
         print(f"\r{message}{' ' * (50 - len(message))}", end="", flush=True)
         winsound.Beep(500, 1000)
         next_alarm += timedelta(hours=1)
