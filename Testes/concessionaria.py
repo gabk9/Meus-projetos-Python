@@ -30,7 +30,7 @@ class purchases:
     date: str
     price: float
 
-def vehiclesMenu(*data):
+def vehiclesMenu(*data) -> None:
     cls()
 
     '''
@@ -92,9 +92,9 @@ def vehiclesMenu(*data):
                 pause()
                 cls()
 
-def clientsMenu(*data):
+def clientsMenu(*data) -> None:
     cls()
-
+    
     '''
         data[0] = Clients.json
         data[1] = Purchases.json
@@ -150,7 +150,7 @@ def clientsMenu(*data):
                 pause()
                 cls()
 
-def purchasesMenu(*data):
+def purchasesMenu(*data) -> None:
     cls()
 
     '''
