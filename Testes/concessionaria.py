@@ -207,7 +207,7 @@ def vDel(*data):
         pause()
         cls()
 
-def vehiclesMenu(*data) -> list:
+def vehiclesMenu(*data) -> None:
     cls()
     vList: list
     registered: int = 0
@@ -254,9 +254,7 @@ def vehiclesMenu(*data) -> list:
                     cls()
             case 0:
                 cls()
-                if registered == 0:
-                    return []
-                return vList
+                break
             case _:
                 print("\nOpção inválida!!")
                 pause()
