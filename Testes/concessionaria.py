@@ -1,7 +1,6 @@
-import os, json, time, platform, getpass, pyfiglet, sys
+import os, json, time, platform, getpass, pyfiglet
 from colorama import init, Fore, Back, Style
 from dataclasses import dataclass
-from datetime import datetime
 
 init(autoreset=True)
 
