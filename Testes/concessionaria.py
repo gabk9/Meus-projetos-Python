@@ -29,14 +29,21 @@ class purchases:
     date: str
     price: float
 
-def vRegist(json_file: str = "Vehicles.json") -> list[Vehicle]:
+def vRegist(*files: str) -> list[Vehicle]:
     cls()
     vehicles = []
 
+    '''
+        files[0] = Vehicles.json
+    '''
+
     try:
-        with open(json_file, "r", encoding="utf-8") as f:
+        with open(files[0], "r", encoding="utf-8") as f:
             data = json.load(f)
     except (FileNotFoundError, json.JSONDecodeError):
+        print("\nArquivo não encontrado!!\n")
+        pause()
+        cls()
         data = []
 
     last_id = data[-1]["id"] + 1 if data else 1
@@ -74,26 +81,32 @@ def vRegist(json_file: str = "Vehicles.json") -> list[Vehicle]:
         cls()
         return data
 
-def vCheck(json_file: str = "Vehicles.json") -> None:
+def vCheck(*files: str) -> None:
     cls()
 
-    try:
-        with open(json_file, "r", encoding="utf-8") as f:
-            data = json.load(f)
-    
-    except (FileNotFoundError, json.JSONDecodeError):
-        print("Arquivo não encontrado!!")
-        pause()
-        cls()
+    '''
+        files[0] = Vehicles.json
+    '''
+
         
     while True:
         print(f'{"Consultar veículos":=^28}')
+        try:
+            with open(files[0], "r", encoding="utf-8") as f:
+                data = json.load(f)
+        
+        except (FileNotFoundError, json.JSONDecodeError):
+            print("\nArquivo não encontrado!!\n")
+            pause()
+            cls()
+            break
+        
 
         for v in data:
             print(f"\nId: {v["id"]} | Modelo: {v["name"]}\n")
 
         try:
-            op = int(input("Digite o Id do carro desejado: "))
+            op = int(input("Digite o Id do carro desejado (0 para sair): "))
 
         except ValueError:
             print("Valor inválido!!")
@@ -101,11 +114,15 @@ def vCheck(json_file: str = "Vehicles.json") -> None:
             cls()
             continue
 
+        if op == 0:
+            cls()
+            break
+
         vehicle = next((v for v in data if v["id"] == op), None)
 
         if vehicle:
             print(f"\n\nId: {vehicle['id']} | Modelo: {vehicle['name']}")
-            print(f"Ano de lançamento: {vehicle['date']} | Preço: {vehicle['price']}\n")
+            print(f"Ano de lançamento: {vehicle['date']} | Preço: {vehicle['price']:.2f}R$\n")
             pause()
             cls()
             break
@@ -115,32 +132,31 @@ def vCheck(json_file: str = "Vehicles.json") -> None:
             cls()
             continue
 
-def vUpdate(*data) -> list[Vehicle]:
+def vUpdate(*files: str) -> None:
     cls()
-    vEdited: int = 0
 
     '''
-        data[0] = Vehicles.json
-        data[1] = Purchases.json
+        files[0] = Vehicles.json
     '''
-
-    try:
-        with open(data[0], "r", encoding="utf-8") as f:
-            data = json.load(f)
-    
-    except (FileNotFoundError, json.JSONDecodeError):
-        print("Arquivo não encontrado!!")
-        pause()
-        cls()
         
     while True:
         print(f'{"Atualizar veículos":=^28}')
+        try:
+            with open(files[0], "r", encoding="utf-8") as f:
+                data: str = json.load(f)
+        
+        except (FileNotFoundError, json.JSONDecodeError):
+            print("\nArquivo não encontrado!!\n")
+            pause()
+            cls()
+            break
+
 
         for v in data:
             print(f"\nId: {v["id"]} | Modelo: {v["name"]}\n")
 
         try:
-            op = int(input("Digite o Id do carro desejado: "))
+            op = int(input("Digite o Id do carro desejado (0 para sair): "))
 
         except ValueError:
             print("Valor inválido!!")
@@ -148,48 +164,49 @@ def vUpdate(*data) -> list[Vehicle]:
             cls()
             continue
 
+        if op == 0:
+            cls()
+            break
+
         vehicle = next((v for v in data if v["id"] == op), None)
 
         if vehicle:
             print(f"\n\nId: {vehicle['id']} | Modelo: {vehicle['name']}")
-            print(f"Ano de lançamento: {vehicle['date']} | Preço: {vehicle['price']}\n")
+            print(f"Ano de lançamento: {vehicle['date']} | Preço: {vehicle['price']:.2f}R$\n")
 
-            try:
-                print("Deixe em branco para não alterar.\n")
-                newName = input("Digite o novo modelo: ")
-                newDate = int(input("Digite o novo ano de lançamento: "))
-                newPrice = float(input("Digite o novo preço: "))
+            print("Deixe em branco para não alterar.\n")
+
+            newName = input("Digite o novo modelo: ").strip()
+            newDate = input("Digite o novo ano de lançamento: ").strip()
+            newPrice = input("Digite o novo preço: ").strip()
             
-            except ValueError:
-                print("Valor inválido!!")
-                pause()
-                cls()
-                continue
 
             if newName:
                 vehicle["name"] = newName
             if newDate:
-                int(newDate)
-                vehicle["date"] = newDate
-            if newPrice:    
-                vehicle["price"] = float(newPrice)
-            vEdited += 1
+                try:
+                    vehicle["date"] = int(newDate)
+                except ValueError:
+                    print("Ano inválido, ignorando alteração.")
+            if newPrice:
+                try:
+                   vehicle["price"] = float(newPrice.replace(",", "."))
+                except ValueError:
+                    print("Preço inválido, ignorando alteração.")
 
-            print("\nNovos Dados salvos no cache!!")
+            with open(files[0], "w", encoding="utf-8") as f:
+                json.dump(data, f, indent=4, ensure_ascii=False)
+
+            print("\nNovos Dados salvos com sucesso!!")
             pause()
             cls()
-
-            if vEdited == 1:
-                return data
-            else:
-                return []
         else:
             print("Id não encontrado!!")
             pause()
             cls()
             continue
         
-def vDel(*data):
+def vDel(*data: str):
     password = input("\nMe diga a senha padrão: ")
     if password == data[1]:
         try:
@@ -207,7 +224,82 @@ def vDel(*data):
         pause()
         cls()
 
-def vehiclesMenu(*data) -> None:
+def vFileRemove(*files: str) -> None:
+    password = input("\nDigite a senha padrão: ")
+
+    '''
+        files[0] = Vehicles.json
+        files[1] = DEFAULT_PASSWORD
+    '''
+
+    if password != files[1]:
+        print("Senha inválida!!")
+        pause()
+        cls()
+        return
+    
+    cls()
+    while True:
+        print(f'{"Removendo veículos":=^28}')
+        try:
+            with open(files[0], "r", encoding="utf-8") as f:
+                data: str = json.load(f)
+
+        except (FileNotFoundError, json.JSONDecodeError):
+            print("\nArquivo não encontrado!!\n")
+            pause()
+            cls()
+            break
+
+        for v in data:
+            print(f"\nId: {v["id"]} | Modelo: {v["name"]}\n")
+
+        try:
+            op = int(input("Digite o Id do carro desejado (0 para sair): "))
+
+        except ValueError:
+            print("Valor inválido!!")
+            pause()
+            cls()
+            continue
+
+        if op == 0:
+            cls()
+            break
+
+        vehicle = next((v for v in data if v["id"] == op), None)
+        
+        if vehicle:
+            print(f"\nId: {vehicle['id']} | Modelo: {vehicle['name']}")
+            print(f"Ano: {vehicle['date']} | Preço: {vehicle['price']:.2f}R$")
+
+            confirm = input("\nDeseja realmente remover este veículo? (s/n): ").lower()
+            if confirm == "s":
+                data.remove(vehicle)
+
+                for i, v in enumerate(data, start=1):
+                    v["id"] = i
+
+                with open(files[0], "w", encoding="utf-8") as f:
+                    json.dump(data, f, indent=4, ensure_ascii=False)
+
+                print("\nVeículo removido com sucesso!!")
+                pause()
+                cls()
+                return
+            else:
+                print("\nRemoção cancelada!!")
+                pause()
+                cls()
+                continue
+        else:
+            print("Id não encontrado!!")
+            pause()
+            cls()
+            continue
+
+
+def vehiclesMenu(*data: str) -> None:
     cls()
     vList: list
     registered: int = 0
@@ -224,7 +316,7 @@ def vehiclesMenu(*data) -> None:
     while True:
         print(f'{"Seção Veículos":=^24}')
         type("[1] Registrar veículos\n[2] Consultar veículos\n[3] Atualizar veículos\n", vehiclesMenu.typeSpeed)
-        type("[4] Deletar veículos\n[5] Salvar dados\n[0] Voltar para o menu principal\n", vehiclesMenu.typeSpeed)
+        type("[4] Deletar veículos\n[5] Deletar todos os veículos\n[6] Salvar dados\n[0] Voltar para o menu principal\n", vehiclesMenu.typeSpeed)
         vehiclesMenu.typeSpeed = 0
 
         try:
@@ -238,15 +330,17 @@ def vehiclesMenu(*data) -> None:
 
         match op:
             case 1:
-                vList = vRegist()
+                vList = vRegist(data[0])
                 registered += 1
             case 2:
-                vCheck()
+                vCheck(data[0])
             case 3:
-                vList = vUpdate(data[0], data[1])
+                vUpdate(data[0], data[1])
             case 4:
-                vDel(data[0], data[2])
+                vFileRemove(data[0], data[2])
             case 5:
+                vDel(data[0], data[2])
+            case 6:
                 with open(data[0], "w", encoding="utf-8") as f:
                     json.dump(vList, f, indent=4, ensure_ascii=False)
                     print("\nVeículos salvos com sucesso!!")
