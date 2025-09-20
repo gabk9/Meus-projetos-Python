@@ -31,7 +31,7 @@ class purchases:
 
 def vRegist(*files: str) -> list[Vehicle]:
     cls()
-    vehicles = []
+    vehicles: list = []
 
     '''
         files[0] = Vehicles.json
@@ -39,19 +39,19 @@ def vRegist(*files: str) -> list[Vehicle]:
 
     try:
         with open(files[0], "r", encoding="utf-8") as f:
-            data = json.load(f)
+            data: str = json.load(f)
     except (FileNotFoundError, json.JSONDecodeError):
         print("\nArquivo não encontrado!!\n")
         pause()
         cls()
-        data = []
+        data: list = []
 
-    last_id = data[-1]["id"] + 1 if data else 1
+    last_id: int = data[-1]["id"] + 1 if data else 1
 
     while True:
         print(f'{"Registrando":=^21}')
         try: 
-            qtd = int(input("Quantos veículos deseja adicionar? "))
+            qtd: int = int(input("Quantos veículos deseja adicionar? "))
         except ValueError:
             print("Valor inválido!!")
             pause()
@@ -61,9 +61,9 @@ def vRegist(*files: str) -> list[Vehicle]:
         for i in range(qtd):
             try:
                 print(f"\n[{i + 1}]")
-                vName = input("   Digite o nome do carro: ")
-                vDate = int(input("   Digite o ano do carro (YYYY): "))
-                vPrice = float(input("   Digite o preço do carro: "))
+                vName: str = input("   Digite o nome do carro: ")
+                vDate: int = int(input("   Digite o ano do carro (YYYY): "))
+                vPrice: float = float(input("   Digite o preço do carro: "))
 
                 v = Vehicle(id=last_id, name=vName, date=str(vDate), price=vPrice)
                 vehicles.append(v)
@@ -93,7 +93,7 @@ def vCheck(*files: str) -> None:
         print(f'{"Consultar veículos":=^28}')
         try:
             with open(files[0], "r", encoding="utf-8") as f:
-                data = json.load(f)
+                data: str = json.load(f)
         
         except (FileNotFoundError, json.JSONDecodeError):
             print("\nArquivo não encontrado!!\n")
@@ -106,7 +106,7 @@ def vCheck(*files: str) -> None:
             print(f"\nId: {v["id"]} | Modelo: {v["name"]}\n")
 
         try:
-            op = int(input("Digite o Id do carro desejado (0 para sair): "))
+            op: int = int(input("Digite o Id do carro desejado (0 para sair): "))
 
         except ValueError:
             print("Valor inválido!!")
@@ -118,7 +118,7 @@ def vCheck(*files: str) -> None:
             cls()
             break
 
-        vehicle = next((v for v in data if v["id"] == op), None)
+        vehicle: int = next((v for v in data if v["id"] == op), None)
 
         if vehicle:
             print(f"\n\nId: {vehicle['id']} | Modelo: {vehicle['name']}")
@@ -156,7 +156,7 @@ def vUpdate(*files: str) -> None:
             print(f"\nId: {v["id"]} | Modelo: {v["name"]}\n")
 
         try:
-            op = int(input("Digite o Id do carro desejado (0 para sair): "))
+            op: int = int(input("Digite o Id do carro desejado (0 para sair): "))
 
         except ValueError:
             print("Valor inválido!!")
@@ -168,7 +168,7 @@ def vUpdate(*files: str) -> None:
             cls()
             break
 
-        vehicle = next((v for v in data if v["id"] == op), None)
+        vehicle: int = next((v for v in data if v["id"] == op), None)
 
         if vehicle:
             print(f"\n\nId: {vehicle['id']} | Modelo: {vehicle['name']}")
@@ -176,9 +176,9 @@ def vUpdate(*files: str) -> None:
 
             print("Deixe em branco para não alterar.\n")
 
-            newName = input("Digite o novo modelo: ").strip()
-            newDate = input("Digite o novo ano de lançamento: ").strip()
-            newPrice = input("Digite o novo preço: ").strip()
+            newName: str = input("Digite o novo modelo: ").strip()
+            newDate: str = input("Digite o novo ano de lançamento: ").strip()
+            newPrice: str = input("Digite o novo preço: ").strip()
             
 
             if newName:
@@ -207,7 +207,7 @@ def vUpdate(*files: str) -> None:
             continue
         
 def vDel(*data: str):
-    password = input("\nMe diga a senha padrão: ")
+    password: str = input("\nMe diga a senha padrão: ")
     if password == data[1]:
         try:
             os.remove(data[0])
@@ -225,7 +225,7 @@ def vDel(*data: str):
         cls()
 
 def vFileRemove(*files: str) -> None:
-    password = input("\nDigite a senha padrão: ")
+    password: str = input("\nDigite a senha padrão: ")
 
     '''
         files[0] = Vehicles.json
@@ -255,7 +255,7 @@ def vFileRemove(*files: str) -> None:
             print(f"\nId: {v["id"]} | Modelo: {v["name"]}\n")
 
         try:
-            op = int(input("Digite o Id do carro desejado (0 para sair): "))
+            op: int = int(input("Digite o Id do carro desejado (0 para sair): "))
 
         except ValueError:
             print("Valor inválido!!")
@@ -267,7 +267,7 @@ def vFileRemove(*files: str) -> None:
             cls()
             break
 
-        vehicle = next((v for v in data if v["id"] == op), None)
+        vehicle: int = next((v for v in data if v["id"] == op), None)
         
         if vehicle:
             print(f"\nId: {vehicle['id']} | Modelo: {vehicle['name']}")
@@ -320,7 +320,7 @@ def vehiclesMenu(*data: str) -> None:
         vehiclesMenu.typeSpeed = 0
 
         try:
-            op = int(input("Escolha uma opção: "))
+            op: int = int(input("Escolha uma opção: "))
 
         except ValueError:
             print("\nValor inválido!!")
@@ -373,7 +373,7 @@ def clientsMenu(*data) -> None:
         clientsMenu.typeSpeed = 0
 
         try:
-            op = int(input("Escolha uma opção: "))
+            op: int = int(input("Escolha uma opção: "))
 
         except ValueError:
             print("\nValor inválido!!")
@@ -391,7 +391,7 @@ def clientsMenu(*data) -> None:
             case 4:
                 raise NotImplementedError("Implementar deletar clientes")
             case 5:
-                password = input("\nDigite a senha padrão: ")
+                password: str = input("\nDigite a senha padrão: ")
 
                 if password == data[2]:
                     try:
@@ -430,7 +430,7 @@ def purchasesMenu(*data) -> None:
         purchasesMenu.typeSpeed = 0
 
         try:
-            op = int(input("\nEscolha uma opção: "))
+            op: int = int(input("\nEscolha uma opção: "))
 
         except ValueError:
             print("\nValor inválido!!")
@@ -444,7 +444,7 @@ def purchasesMenu(*data) -> None:
             case 2:
                 raise NotImplementedError("Implementar deletar vendas")
             case 3:
-                password = input("\nDigite a senha padrão: ")
+                password: str = input("\nDigite a senha padrão: ")
 
                 if password == data[1]:
                     try:
@@ -477,7 +477,7 @@ def pause() -> None:
     else:
         getpass.getpass("Pressione qualquer tecla para continuar...")
 
-def Sleep(ms) -> None:
+def Sleep(ms: int) -> None:
     time.sleep(ms / 1000)
 
 def cls() -> None:
@@ -515,7 +515,7 @@ def credits() -> None:
         type("[1] Ver créditos\n[0] Voltar para o Menu principal\n", credits.typeSpeed)
         credits.typeSpeed = 0
         try:
-            op = int(input("Escolha uma opção: "))
+            op: int = int(input("Escolha uma opção: "))
 
         except ValueError:
             print("\nValor inválido!!")
@@ -569,7 +569,7 @@ def deleteData(*data) -> None:
         type("[1] Deletar tudo\n[0] Voltar para o menu principal\n", deleteData.typeSpeed)
         deleteData.typeSpeed = 0
         try:
-            op = int(input("Escolha uma opção: "))
+            op: int = int(input("Escolha uma opção: "))
 
         except ValueError:
             print("\nValor inválido!!")
@@ -579,7 +579,7 @@ def deleteData(*data) -> None:
 
         match op:
             case 1:
-                password = input("\nMe diga a senha padrão: ")
+                password: str = input("\nMe diga a senha padrão: ")
                 
                 if password == data[3]:
                     try:
@@ -627,7 +627,7 @@ def main() -> None:
         case _:
             print("\nSistema desconhecido")    
 
-    ascii_art = pyfiglet.figlet_format("MEU CRUD")
+    ascii_art: str = pyfiglet.figlet_format("MEU CRUD")
 
     print(Fore.RED + Back.BLACK + ascii_art + Style.RESET_ALL)
     Vload(25, 50)
