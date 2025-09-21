@@ -1,6 +1,7 @@
 import os, json, time, platform, getpass, pyfiglet
 from colorama import init, Fore, Back, Style
 from dataclasses import dataclass
+from datetime import datetime
 
 init(autoreset=True)
 
@@ -39,7 +40,7 @@ def vRegist(*files: str) -> None:
 
     try:
         with open(files[0], "r", encoding="utf-8") as f:
-            data: str = json.load(f)
+            data: list = json.load(f)
     except (FileNotFoundError, json.JSONDecodeError):
         data: list = []
 
@@ -93,7 +94,7 @@ def vCheck(*files: str) -> None:
         print(f'{"Consultar veículos":=^28}')
         try:
             with open(files[0], "r", encoding="utf-8") as f:
-                data: str = json.load(f)
+                data: list = json.load(f)
         
         except (FileNotFoundError, json.JSONDecodeError):
             print("\nArquivo não encontrado!!\n")
@@ -103,7 +104,7 @@ def vCheck(*files: str) -> None:
         
 
         for v in data:
-            print(f"\nId: {v["id"]} | Modelo: {v["name"]}\n")
+            print(f"\nId: {v['id']} | Modelo: {v['name']}\n")
 
         try:
             op: int = int(input("Digite o Id do carro desejado (0 para sair): "))
@@ -118,7 +119,7 @@ def vCheck(*files: str) -> None:
             cls()
             break
 
-        vehicle: int = next((v for v in data if v["id"] == op), None)
+        vehicle: int = next((v for v in data if v['id'] == op), None)
 
         if vehicle:
             print(f"\n\nId: {vehicle['id']} | Modelo: {vehicle['name']}")
@@ -143,7 +144,7 @@ def vUpdate(*files: str) -> None:
         print(f'{"Atualizar veículos":=^28}')
         try:
             with open(files[0], "r", encoding="utf-8") as f:
-                data: str = json.load(f)
+                data: list = json.load(f)
         
         except (FileNotFoundError, json.JSONDecodeError):
             print("\nArquivo não encontrado!!\n")
@@ -225,7 +226,7 @@ def vFileRemove(*files: str) -> None:
         print(f'{"Removendo veículos":=^28}')
         try:
             with open(files[0], "r", encoding="utf-8") as f:
-                data: str = json.load(f)
+                data: list = json.load(f)
 
         except (FileNotFoundError, json.JSONDecodeError):
             print("\nArquivo não encontrado!!\n")
@@ -234,7 +235,7 @@ def vFileRemove(*files: str) -> None:
             break
 
         for v in data:
-            print(f"\nId: {v["id"]} | Modelo: {v["name"]}\n")
+            print(f"\nId: {v['id']} | Modelo: {v['name']}\n")
 
         try:
             op: int = int(input("Digite o Id do carro desejado (0 para sair): "))
@@ -249,7 +250,7 @@ def vFileRemove(*files: str) -> None:
             cls()
             break
 
-        vehicle: int = next((v for v in data if v["id"] == op), None)
+        vehicle: int = next((v for v in data if v['id'] == op), None)
         
         if vehicle:
             print(f"\nId: {vehicle['id']} | Modelo: {vehicle['name']}")
@@ -286,7 +287,7 @@ def vehiclesMenu(*data: str) -> None:
 
     '''
         data[0] = Vehicles.json
-        data[1] = Purchases.json # TODO: add Purchases.json sync
+        data[1] = Purchases.json
         data[2] = DEFAULT_PASSWORD
     '''
 
@@ -322,12 +323,12 @@ def vehiclesMenu(*data: str) -> None:
                 if password == data[2]:
                     try:
                         os.remove(data[0])
-                        print("Todos os veículos foram apagados com sucesso!!")
+                        print(f"\n{data[0]} apagado com sucesso!!")
                         pause()
                         cls()
 
                     except FileNotFoundError:
-                        print("O arquivo não existe!!")
+                        print(f"\n{data[0]} não existe!!")
                         pause()
                         cls()
                 else:
@@ -352,11 +353,11 @@ def cRegist(*files: str) -> None:
 
     try:
         with open(files[0], "r", encoding="utf-8") as f:
-            data: str = json.load(f)
+            data: list = json.load(f)
     except (FileNotFoundError, json.JSONDecodeError):
         data: list = []
 
-    last_id: int = data[-1]["id"] + 1 if data else 1
+    last_id: int = data[-1]['id'] + 1 if data else 1
 
     while True:
         print(f'{"Registrando":=^21}')
@@ -401,7 +402,7 @@ def cCheck(*files: str) -> None:
         print(f'{"Consultar clientes":=^28}')
         try:
             with open(files[0], "r", encoding="utf-8") as f:
-                data: str = json.load(f)
+                data: list = json.load(f)
         
         except (FileNotFoundError, json.JSONDecodeError):
             print("\nArquivo não encontrado!!\n")
@@ -411,57 +412,7 @@ def cCheck(*files: str) -> None:
         
 
         for c in data:
-            print(f"\nId: {c["id"]} | Nome: {c["name"]}\n")
-
-        try:
-            op: int = int(input("Digite o Id do cliente desejado (0 para sair): "))
-
-        except ValueError:
-            print("Valor inválido!!")
-            pause()
-            cls()
-            continue
-
-        if op == 0:
-            cls()
-            break
-
-        client: int = next((c for c in data if c["id"] == op), None)
-
-        if client:
-            print(f"\n\nId: {client['id']} | Nome: {client['name']}")
-            print(f"Cpf: {client['cpf']} | Número de telefone: {client['telNumber']}\n")
-            pause()
-            cls()
-            break
-        else:
-            print("Id não encontrado!!")
-            pause()
-            cls()
-            continue
-
-def cUpdate(*files: str) -> None:
-    cls()
-
-    '''
-        files[0] = Clients.json
-    '''
-        
-    while True:
-        print(f'{"Atualizar clientes":=^28}')
-        try:
-            with open(files[0], "r", encoding="utf-8") as f:
-                data: str = json.load(f)
-        
-        except (FileNotFoundError, json.JSONDecodeError):
-            print("\nArquivo não encontrado!!\n")
-            pause()
-            cls()
-            break
-
-
-        for v in data:
-            print(f"\nId: {v['id']} | Nome: {v['name']}\n")
+            print(f"\nId: {c['id']} | Nome: {c['name']}\n")
 
         try:
             op: int = int(input("Digite o Id do cliente desejado (0 para sair): "))
@@ -481,22 +432,86 @@ def cUpdate(*files: str) -> None:
         if client:
             print(f"\n\nId: {client['id']} | Nome: {client['name']}")
             print(f"Cpf: {client['cpf']} | Número de telefone: {client['telNumber']}\n")
+            pause()
+            cls()
+            break
+        else:
+            print("Id não encontrado!!")
+            pause()
+            cls()
+            continue
+
+def cUpdate(*files: str) -> None:
+    cls()
+
+    '''
+        files[0] = Clients.json
+        files[1] = Purchases.json
+    '''
+        
+    while True:
+        print(f'{"Atualizar clientes":=^28}')
+        try:
+            with open(files[0], "r", encoding="utf-8") as f:
+                data: list = json.load(f)
+        
+        except (FileNotFoundError, json.JSONDecodeError):
+            print("\nArquivo não encontrado!!\n")
+            pause()
+            cls()
+            break
+
+        for v in data:
+            print(f"\nId: {v['id']} | Nome: {v['name']}\n")
+
+        try:
+            op: int = int(input("Digite o Id do cliente desejado (0 para sair): "))
+
+        except ValueError:
+            print("Valor inválido!!")
+            pause()
+            cls()
+            continue
+
+        if op == 0:
+            cls()
+            break
+
+        client: dict = next((c for c in data if c['id'] == op), None)
+
+        if client:
+            print(f"\n\nId: {client['id']} | Nome: {client['name']}")
+            print(f"Cpf: {client['cpf']} | Número de telefone: {client['telNumber']}\n")
 
             print("Deixe em branco para não alterar.\n")
 
-            newName: str = input("Digite o novo modelo: ").strip()
+            newName: str = input("Digite o novo nome: ").strip()
             newCpf: str = input("Digite o novo cpf: ").strip()
             newTelNumber: str = input("Digite o novo número de telefone ((AA) NNNNN-NNNN): ").strip()
             
-
             if newName:
                 client['name'] = newName
             if newCpf:
                 client['cpf'] = newCpf
             if newTelNumber:
                 client['telNumber'] = newTelNumber
+
             with open(files[0], "w", encoding="utf-8") as f:
                 json.dump(data, f, indent=4, ensure_ascii=False)
+
+            try:
+                with open(files[1], "r", encoding="utf-8") as pF:
+                    pData: list = json.load(pF)
+
+                for p in pData:
+                    if p['clientId'] == op:
+                        p['clientName'] = client['name'] 
+
+                with open(files[1], "w", encoding="utf-8") as pF:
+                    json.dump(pData, pF, indent=4, ensure_ascii=False)
+
+            except (FileNotFoundError, json.JSONDecodeError):
+                print("\nArquivo de compras não encontrado!! (ignorado)\n")
 
             print("\nNovos Dados salvos com sucesso!!")
             pause()
@@ -512,10 +527,11 @@ def cFileRemove(*files: str) -> None:
 
     '''
         files[0] = Vehicles.json
-        files[1] = DEFAULT_PASSWORD
+        files[1] = Purchases.json
+        files[2] = DEFAULT_PASSWORD
     '''
 
-    if password != files[1]:
+    if password != files[2]:
         print("Senha inválida!!")
         pause()
         cls()
@@ -526,13 +542,15 @@ def cFileRemove(*files: str) -> None:
         print(f'{"Removendo clientes":=^28}')
         try:
             with open(files[0], "r", encoding="utf-8") as f:
-                data: str = json.load(f)
+                data: list = json.load(f)
 
         except (FileNotFoundError, json.JSONDecodeError):
-            print("\nArquivo não encontrado!!\n")
+            print("\nArquivo de clientes não encontrado!!\n")
             pause()
             cls()
             break
+
+            
 
         for c in data:
             print(f"\nId: {c['id']} | Nome: {c['name']}\n")
@@ -563,13 +581,34 @@ def cFileRemove(*files: str) -> None:
                 for i, c in enumerate(data, start=1):
                     c['id'] = i
 
+
                 with open(files[0], "w", encoding="utf-8") as f:
                     json.dump(data, f, indent=4, ensure_ascii=False)
 
-                print("\nCliente removido com sucesso!!")
+                
+                try:
+                    with open(files[1], "r", encoding="utf-8") as pF:
+                        pData: list = json.load(pF)
+
+                    pData = [pC for pC in pData if pC['clientId'] != op]
+
+                    with open(files[1], "w", encoding="utf-8") as pF:
+                        json.dump(pData, pF, indent=4, ensure_ascii=False)
+
+                    print("\nCliente removido com sucesso!!")       
+                            
+                except (FileNotFoundError, json.JSONDecodeError):
+                    print("\nArquivo de compras não encontrado!!\n")
+                    pause()
+                    cls()
+                    break
+
+
                 pause()
                 cls()
-                return
+                return  
+            
+
             else:
                 print("\nRemoção cancelada!!")
                 pause()
@@ -582,12 +621,13 @@ def cFileRemove(*files: str) -> None:
             continue
 
 
+
 def clientsMenu(*data) -> None:
     cls()
     
     '''
         data[0] = Clients.json
-        data[1] = Purchases.json # TODO: add Purchases.json sync
+        data[1] = Purchases.json 
         data[2] = DEFAULT_PASSWORD
     '''
 
@@ -615,21 +655,21 @@ def clientsMenu(*data) -> None:
             case 2:
                 cCheck(data[0])
             case 3:
-                cUpdate(data[0])
+                cUpdate(data[0], data[1])
             case 4:
-                cFileRemove(data[0], data[2])
+                cFileRemove(data[0], data[1], data[2])
             case 5:
                 password: str = input("\nDigite a senha padrão: ")
 
                 if password == data[2]:
                     try:
                         os.remove(data[0])
-                        print("Clientes removidos com sucesso!!")
+                        print(f"\n{data[0]} com sucesso!!")
                         pause()
                         cls()
 
                     except FileNotFoundError:
-                        print("O arquivo não existe!!")
+                        print(f"\n{data[0]} não existe!!")
                         pause()
                         cls()
                 else:
@@ -644,12 +684,167 @@ def clientsMenu(*data) -> None:
                 pause()
                 cls()
 
+
+def pRegist(*files: str) -> None:
+    cls()
+
+    '''
+        files[0] = Purchases.json
+        files[1] = Clients.json
+        files[2] = Vehicles.json
+        files[3] = DEFAULT_PASSWORD
+    '''
+
+    try:
+        with open(files[0], "r", encoding="utf-8") as f:
+            data: list = json.load(f)
+
+    except (FileNotFoundError, json.JSONDecodeError):
+        data: list = []
+
+    last_id: int = data[-1]["purchaseId"] + 1 if data else 1
+
+    while True:
+        print(f'{"Registrar compra":=^26}')
+
+        try:
+            with open(files[1], "r", encoding="utf-8") as f:
+                clients: list = json.load(f)
+
+        except (FileNotFoundError, json.JSONDecodeError):
+            print("Nenhum cliente cadastrado!!")
+            pause()
+            cls()
+            return
+
+        for c in clients:
+            print(f"\nId: {c['id']} | Nome: {c['name']}\n")
+
+        try:
+            clientId: int = int(input("\nDigite o Id do cliente: "))
+
+        except ValueError:
+            print("Valor inválido!!")
+            pause()
+            cls()
+            continue
+
+        client = next((c for c in clients if c["id"] == clientId), None)
+        if not client:
+            print("Cliente não encontrado!!")
+            pause()
+            cls()
+            continue
+
+        try:
+            with open(files[2], "r", encoding="utf-8") as f:
+                vehicles: list = json.load(f)
+
+        except (FileNotFoundError, json.JSONDecodeError):
+            print("Nenhum veículo cadastrado!!")
+            pause()
+            cls()
+            return
+
+        for v in vehicles:
+            print(f"\nId: {v['id']} | Modelo: {v['name']} | Preço: {v['price']:.2f}R$\n")
+
+        try:
+            vehicleId: int = int(input("\nDigite o Id do veículo: "))
+
+        except ValueError:
+            print("Valor inválido!!")
+            pause()
+            cls()
+            continue
+
+        vehicle = next((v for v in vehicles if v["id"] == vehicleId), None)
+        if not vehicle:
+            print("Veículo não encontrado!!")
+            pause()
+            cls()
+            continue
+
+        today: str = datetime.now().strftime("%Y-%m-%d")
+
+        p = purchases(
+            purchaseId=last_id,
+            clientId=client["id"],
+            clientName=client["name"],
+            vehicleId=vehicle["id"],
+            vehicleName=vehicle["name"],
+            date=today,
+            price=vehicle["price"]
+        )
+
+        data.append(p.__dict__)
+
+        with open(files[0], "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=4, ensure_ascii=False)
+
+        print("\nCompra registrada com sucesso!!")
+        pause()
+        cls()
+        break
+
+def pCheck(*files: str) -> None:
+    cls()
+
+    '''
+        files[0] = Purchases.json
+    '''
+
+    while True:
+        print(f'{"Consultar compras":=^27}')
+        try:
+            with open(files[0], "r", encoding="utf-8") as f:
+                data: list = json.load(f)
+
+        except (FileNotFoundError, json.JSONDecodeError):
+            print("\nArquivo não encontrado!!\n")
+            pause()
+            cls()
+            break
+
+        for p in data:
+            print(f"\nId da compra: {p['purchaseId']} | Nome do Cliente: {p['clientName']} | data da compra: {p['date']}\n")
+        
+        try:
+            op: int = int(input("Digite o id da compra desejada (0 para sair): "))
+
+        except ValueError:
+            print("Valor inválido!!")
+            pause()
+            cls()
+            continue
+        
+        if op == 0:
+            cls()
+            break
+            
+        purchase: int = next((p for p in data if p['purchaseId'] == op), None)
+
+        if purchase:
+            print(f"\n\nId  da compra: {purchase['purchaseId']} | Id do Cliente: {purchase['clientId']}")
+            print(f"Id do veículo: {purchase['vehicleId']} | Modelo do veículo: {purchase['vehicleName']}")
+            print(f"Data da compra: {purchase['date']} | Preço da compra: {purchase['price']:.2f}R$\n")
+            pause()
+            cls()
+        else:
+            print("Id não encontrado!!")
+            pause()
+            cls()
+            continue
+
+
 def purchasesMenu(*data) -> None:
     cls()
 
     '''
         data[0] = Purchases.json
-        data[1] = DEFAULT_PASSWORD
+        data[1] = Clients.json
+        data[2] = Vehicles.json
+        data[3] = DEFAULT_PASSWORD
     '''
 
     if not hasattr(purchasesMenu, "typeSpeed"):
@@ -657,8 +852,8 @@ def purchasesMenu(*data) -> None:
 
     while True:
         print(f'{"Seção vendas":=^22}')
-        type("[1] Listar vendas\n[2] Deletar vendas\n[3] Deletar todas as vendas\n", purchasesMenu.typeSpeed)
-        type("[0] Voltar para o menu principal", purchasesMenu.typeSpeed)
+        type("[1] Registrar venda\n[2] Listar vendas\n", purchasesMenu.typeSpeed)
+        type("[3] Deletar todas as vendas\n[0] Voltar para o menu principal", purchasesMenu.typeSpeed)
         purchasesMenu.typeSpeed = 0
 
         try:
@@ -672,21 +867,21 @@ def purchasesMenu(*data) -> None:
         
         match op:
             case 1:
-                raise NotImplementedError("Implementar listar vendas")
+                pRegist(data[0], data[1], data[2], data[3])
             case 2:
-                raise NotImplementedError("Implementar deletar vendas")
+                pCheck(data[0])
             case 3:
                 password: str = input("\nDigite a senha padrão: ")
 
-                if password == data[1]:
+                if password == data[3]:
                     try:
                         os.remove(data[0])
-                        print("Vendas removidas com sucesso!!")
+                        print(f"\n{data[0]} apagado com sucesso!!")
                         pause()
                         cls()
 
                     except FileNotFoundError:
-                        print("O arquivo não existe!!")
+                        print(f"\n{data[0]} não existe!!")
                         pause()
                         cls()
                 else:
@@ -760,7 +955,7 @@ def credits() -> None:
                 cls()
                 strings: str = ("Feito por Gabriel Oliveira Miranda",
                                 "Um estudante do primeiro ano",
-                                "Esse código ainda está em beta!")
+                                "Esse código está completo!! - v1.1")
                 
                 loopCount: int = 0
                 while loopCount < 3:
@@ -796,21 +991,28 @@ def deleteData(*data) -> None:
     if password == data[3]:
         try:
             os.remove(data[0])
-            os.remove(data[1])
-            os.remove(data[2])
-            print("Dados apagados com sucesso!!")
-            pause()
-            cls()
-
+            print(f"\n{data[0]} apagado com sucesso!!")
         except FileNotFoundError:
-            print("Os arquivos não existem!!")
-            pause()
-            cls()
+            print(f"\n{data[0]} não existe!!")
+
+        try:
+            os.remove(data[1])
+            print(f"{data[1]} apagado com sucesso!!")
+        except FileNotFoundError:
+            print(f"{data[1]} não existe!!")
+
+        try:
+            os.remove(data[2])
+            print(f"{data[2]} apagado com sucesso!!")
+        except FileNotFoundError:
+            print(f"{data[2]} não existe!!")
+
+        pause()
+        cls()
     else:
         print("Senha inválida!!")
         pause()
         cls()
-
 
 def main() -> None:
     op: int = 0
@@ -846,7 +1048,7 @@ def main() -> None:
         typeSpeed: int = 0
 
         try:
-            op = int(input("Escolha uma opção: ")) 
+            op: int = int(input("Escolha uma opção: ")) 
             #! On Linux it just keeps going to "case _:" whenever i compile the code, i couldn't fix it
 
         except ValueError:
@@ -861,7 +1063,7 @@ def main() -> None:
             case 2:
                 clientsMenu(CLIENTS_FILE, PURCHASE_RECORD, DEFAULT_PASSWORD)
             case 3:
-                purchasesMenu(PURCHASE_RECORD, DEFAULT_PASSWORD)
+                purchasesMenu(PURCHASE_RECORD, CLIENTS_FILE, VEHICLES_FILE, DEFAULT_PASSWORD)
             case 4:
                 credits()
             case 5:
