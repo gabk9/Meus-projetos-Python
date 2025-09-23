@@ -126,7 +126,6 @@ def vCheck(*files: str) -> None:
             print(f"Ano de lançamento: {vehicle['date']} | Preço: {vehicle['price']:.2f}R$\n")
             pause()
             cls()
-            break
         else:
             print("Id não encontrado!!")
             pause()
@@ -434,7 +433,6 @@ def cCheck(*files: str) -> None:
             print(f"Cpf: {client['cpf']} | Número de telefone: {client['telNumber']}\n")
             pause()
             cls()
-            break
         else:
             print("Id não encontrado!!")
             pause()
@@ -622,7 +620,7 @@ def cFileRemove(*files: str) -> None:
 
 
 
-def clientsMenu(*data) -> None:
+def clientsMenu(*data: str) -> None:
     cls()
     
     '''
@@ -837,7 +835,7 @@ def pCheck(*files: str) -> None:
             continue
 
 
-def purchasesMenu(*data) -> None:
+def purchasesMenu(*data: str) -> None:
     cls()
 
     '''
@@ -953,9 +951,9 @@ def credits() -> None:
         match op:
             case 1:
                 cls()
-                strings: str = ("Feito por Gabriel Oliveira Miranda",
-                                "Um estudante do primeiro ano",
-                                "Esse código está completo!! - v1.1")
+                strings: tuple = ("Feito por Gabriel Oliveira Miranda",
+                                 "Um estudante do primeiro ano",
+                                 "Esse código está completo!! - v1.1")
                 
                 loopCount: int = 0
                 while loopCount < 3:
@@ -977,7 +975,7 @@ def credits() -> None:
                 pause()
                 cls()
 
-def deleteData(*data) -> None:
+def deleteData(*data: str) -> None:
     
     '''
         data[0] = Clients.json
