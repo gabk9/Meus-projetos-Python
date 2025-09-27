@@ -2,9 +2,10 @@ from random import randint
 import os
 
 FILE = "maxNum.txt"
-MAXNUMS = 10_000_000
+MAXNUMS = 10**8
 MAXGEN = 2**63
-#! to generate 10e8 64bits numbers and find the max took 14.2s, 198mb file, using hdd, i5-4690, 16gb of ram and using Linux
+#! to generate 10e8 64bits numbers and find the max took 2mins and 13s, 1.85gb file, using hdd, i5-4690, 16gb of ram and using Linux
+
 if not os.path.exists(FILE):
     with open(FILE, "w") as f:
         for _ in range(MAXNUMS):
