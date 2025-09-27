@@ -1,16 +1,20 @@
 from random import randint
+import os
 
-FILE: str = "maxNum.txt"
+FILE = "maxNum.txt"
+MAXNUMS = 10_000_000
+MAXGEN = 2**63
+#! to generate 10e8 64bits numbers and find the max took 14.2s, 198mb file, using hdd, i5-4690, 16gb of ram and using Linux
+if not os.path.exists(FILE):
+    with open(FILE, "w") as f:
+        for _ in range(MAXNUMS):
+            f.write(f"{randint(1, MAXGEN)}\n")
 
-while True:
-    try:
-        with open(FILE, "r") as f:
-            content: str = f.read()
-            nums = [int(value) for value in content.split()]
-            print("O maior número desse .txt é: ", max(nums))
-            break
-            
-    except FileNotFoundError:
-        with open(FILE, "w") as f:
-            for _ in range(10 ** 5):
-                f.write(f"{randint(1, 10 ** 6)} ")
+maior = 0
+with open(FILE, "r") as f:
+    for line in f:
+        n = int(line)
+        if n > maior:
+            maior = n
+
+print("O maior número desse .txt é:", maior)
