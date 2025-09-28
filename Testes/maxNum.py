@@ -16,6 +16,6 @@ with open(FILE, "r") as f:
     for line in f:
         n: int = int(line)
         if n > max:
-            max = n
+            max: int = n
 
 print("The biggest number of this .txt is:", max)
