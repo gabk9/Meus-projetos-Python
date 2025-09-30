@@ -1,6 +1,6 @@
 
 def collatz(n: int) -> list:
-    seq = [n]
+    seq: list = [n]
 
     while n != 1 and n != 0:
         
@@ -21,7 +21,7 @@ def main() -> None:
         if num == 0:
             break
 
-        lista = collatz(num)
+        lista: list = collatz(num)
 
         print(f"Sequência Collatz do número {num}: {lista}")
 
