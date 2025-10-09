@@ -27,6 +27,11 @@ def main() -> None:
     while True:
         try: 
             n: int = int(input("Digite o tamanho da lista: "))
+            
+            if n <= 0:
+                print("A quantidade tem que ser maior que 0!!");
+                continue
+
             lista: list = list(range(1, n+1))
             alvo: int = int(input("Digite o valor a buscar: "))
         except ValueError:
