@@ -24,16 +24,22 @@ def busca_binaria(lista: list, alvo: int) -> int:
     return -1
 
 def main():
-    n: int = int(input("Digite o tamanho da lista: "))
-    lista: list = list(range(1, n+1))
-    alvo: int = int(input("Digite o valor a buscar: "))
+    while True:
+        try: 
+            n: int = int(input("Digite o tamanho da lista: "))
+            lista: list = list(range(1, n+1))
+            alvo: int = int(input("Digite o valor a buscar: "))
+        except ValueError:
+            print("Digite um valor válido!!");
+            continue
 
-    log_valor: float = math.log2(n)
-    passos_max: int = math.ceil(log_valor)
-    print(f"\nlog2({n}) = {log_valor:.4f}")
-    print(f"Passos máximos teóricos (ceil): {passos_max}")
+        log_valor: float = math.log2(n)
+        passos_max: int = math.ceil(log_valor)
+        print(f"\nlog2({n}) = {log_valor:.4f}")
+        print(f"Passos máximos teóricos (ceil): {passos_max}")
 
-    busca_binaria(lista, alvo)
+        busca_binaria(lista, alvo)
+        break
 
 if __name__ == "__main__":
     main()
