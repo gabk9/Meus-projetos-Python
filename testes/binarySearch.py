@@ -23,7 +23,7 @@ def busca_binaria(lista: list, alvo: int) -> int:
     print(f"\nAlvo {alvo} não encontrado após {comparacoes} comparações.")
     return -1
 
-def main():
+def main() -> None:
     while True:
         try: 
             n: int = int(input("Digite o tamanho da lista: "))
