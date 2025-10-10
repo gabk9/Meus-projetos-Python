@@ -1,4 +1,17 @@
 import math
+from random import randint
+
+def gerar_lista(init: int, end: int) -> list:
+    lista = [init]
+    soma = 0
+    for _ in range(1, end): 
+        diff = randint(1, 5)  # diferença entre 1 e 5
+        lista.append(lista[-1] + diff)
+        soma += diff
+
+    media = soma / (end - 1) if end > 1 else 0
+    print(f"\nMédia das diferenças entre os números: {media:.2f}")
+    return lista
 
 def busca_binaria(lista: list, alvo: int) -> int:
     inicio: int = 0
@@ -16,9 +29,9 @@ def busca_binaria(lista: list, alvo: int) -> int:
             print(f"\nAlvo {alvo} encontrado no índice {meio} em {comparacoes} comparações.")
             return meio
         elif lista[meio] < alvo:
-            inicio: int = meio + 1
+            inicio = meio + 1
         else:
-            fim: int = meio - 1 
+            fim = meio - 1 
 
     print(f"\nAlvo {alvo} não encontrado após {comparacoes} comparações.")
     return -1
@@ -29,15 +42,17 @@ def main() -> None:
             n: int = int(input("Digite o tamanho da lista: "))
             
             if n <= 0:
-                print("A quantidade tem que ser maior que 0!!");
+                print("A quantidade tem que ser maior que 0!!")
                 continue
 
-            lista: list = list(range(1, n+1))
             alvo: int = int(input("Digite o valor a buscar: "))
+
         except ValueError:
-            print("Digite um valor válido!!");
+            print("Digite um valor válido!!")
             continue
 
+        lista: list = gerar_lista(1, n) 
+        
         log_valor: float = math.log2(n)
         passos_max: int = math.ceil(log_valor)
         print(f"\nlog2({n}) = {log_valor:.4f}")
